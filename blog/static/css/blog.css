@@ -1,0 +1,110 @@
+.navbar .portfolionav {
+    border-left: 1px solid white;
+}
+
+
+.navbar-dark .navbar-nav .nav-link{
+    color:rgb(255, 255, 255);
+    border-radius: 6px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.navbar-dark .menu .nav-link:hover{
+    color: #40b2d8;
+    background-color: white;
+}
+
+.navbar-dark .portfolio .nav-link{
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    display: inline-block;
+}
+
+
+.navbar-dark .portfolio .nav-link:hover{
+    color:rgb(255, 255, 255);
+    /* border-radius: 6px;
+    margin-left: 2px;
+    margin-right: 2px; */
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate3d(270deg);
+    -o-transform: rotate3d(270deg);
+    -ms-transform: rotate3d(270deg);
+    transform: rotate3d(270deg);
+    display: inline-block;
+}
+
+#active {
+    color: #40b2d8;
+    background-color: white;
+}
+
+.fonty{
+    font-family: 'Sirin Stencil', sans-serif;
+}
+
+
+
+::selection {
+    background: #4cb7d5; /* WebKit/Blink Browsers */
+  }
+::-moz-selection {
+background: #4cb7d5; /* Gecko Browsers */
+}
+
+.customnav{
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.customtext{
+    background: radial-gradient(circle, rgba(0,147,233,1) 0%, rgba(128,208,199,1) 25%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.jumbotron{
+    background-color: white;
+    border: 5px solid transparent;
+    border-image: linear-gradient(100deg, #0093E9 0%, #80D0C7 100%);
+    border-image-slice: 1;
+}
+
+.btn-warning{
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    border-color: rgb(80, 180, 238);
+    color: white;
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+}
+
+.btn-warning:hover{
+    color: white;
+    border-color: rgb(80, 180, 238);
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    -webkit-transform: scale(1.2);
+}
+
+/* .loginbtndiv{
+    justify-content: center;
+} */

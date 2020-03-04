@@ -1,0 +1,86 @@
+{%  extends 'blog/base.html' %}
+{% block link %}active{%endblock%}
+
+{% block content %}
+
+<div>
+    <div>
+        <h1 class="customtext"><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p>Posted by: {{post.author|title}}</p>
+        </div>
+        <div class="col-md-4">
+            {% if post.published_date %}
+                <p>Posted on: {{post.published_date|date:"D d M Y"}} at {{post.published_date|time:"g:i a"}}</p>
+            {% else %}
+                <p>This Post has not yet been published</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4" align="right">
+            {% if post.published_date %}
+                    {% if post.approved_comments %}
+                        <p>Comment(s): {{post.approved_comments.count}}</p>
+                    {% else %}
+                        <p>No Comments</p>
+                    {% endif %}
+                
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+        <div>
+            <p>{{post.text|safe}}</p>
+        </div>
+        <div>
+            {% if user.username == post.alias %}
+                {% if post.published_date %}
+                    <a href="{% url 'editpost' pk=post.pk %}"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'deletepost' pk=post.pk %}"><i class="fas fa-trash"></i></a>
+                {% else %}
+                    <a href="{% url 'publish_post' pk=post.pk %}"><input type="button" value="PUBLISH" class="btn btn-warning btn-lg"></a>
+                    <a href="{% url 'editpost' pk=post.pk %}"><i class="fas fa-edit btn btn-secondary btn-lg"></i></a>
+                    <a href="{% url 'deletepost' pk=post.pk %}"><i class="fas fa-trash btn btn-danger btn-lg"></i></a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'add_comment_to_post' pk=post.pk %}"><input type="button" value="COMMENT" class="btn btn-warning btn-lg"></a>
+            {% endif %}
+        </div>
+        <div class="container">
+            {% if user.is_authenticated and post.alias == user.username %}
+                {% if post.comments %}
+                    {% for comment in post.comments.all %}
+                        {% if comment.approved_comment == False %}
+                            <hr>
+                            <p>Comment by {{comment.author}} on {{comment.created_date|date:"l, M n Y"}}</p>
+                            <p>{{comment.text|safe}}</p>
+                            <a href="{% url 'approve_comment' pk=comment.pk %}"><i class="fas fa-check btn btn-secondary btn-lg">APPROVE</i></a>
+                            <a href="{% url 'delete_comment' pk=comment.pk %}"><i class="fas fa-window-close btn btn-danger btn-lg">REJECT</i></a>
+                        {% elif comment.approved_comment == True %}
+                            <hr>
+                            <p>Comment by {{comment.author}} on {{comment.created_date|date:"l, M n Y"}}</p>
+                            <p>{{comment.text|safe}}</p>
+                            <a href="{% url 'delete_comment' pk=comment.pk %}"><i class="fas fa-window-close btn btn-danger btn-lg"> DELETE</i></a>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>No comments</p>
+                {% endif %}
+            {% else %}
+                {% for comment in post.comment.all %}
+                    {% if comment.approved_comment == True %}
+                        <hr>
+                        <p>Comment by {{comment.author}} on {{comment.created_date|date:"l, M n Y"}}</p>
+                        <p>{{comment.text|safe}}</p>
+                    {% else %}
+                        <p>No comments</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

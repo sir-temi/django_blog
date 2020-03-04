@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block profile %} id="active" {%endblock%}
+
+{% block content %}
+
+<!-- <p><span style="font-weight: 900;">{{user.username}}</span>{% if user.is_superuser %}<sup>ADMIN</sup>{% elif user.is_staff %}<sup>STAFF</sup>{% endif %}</p> -->
+<p><span style="font-weight: bolder; font-size: 3em;">{{user.username}} </span>{% if user.is_superuser %}<sup>ADMIN</sup>{% elif user.is_staff %}<sup>STAFF</sup>{% endif %}</p>
+<h1>Welcome to your profile {{user.first_name}} {{user.last_name}}</h1>
+<h2>You joined on {{user.date_joined}}</h2>
+<h4>You have post {{posts.count}} contents</h4>
+    <ol>
+        {% for post in posts %}
+            <li>{{post.title}}</li>
+            <ul>
+                {% for comment in post.comments.all %}
+                    <li>{{comment.text}}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ol>
+
+    {% for i in post.comments.all %}
+        {{i.author}}
+    {% endfor %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% block drafts %}id="active"{% endblock %}
+
+{% block content %}
+{% for post in post_list %}
+    <div>
+        <div>
+            <h1 class="customtext"><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Posted by: {{post.author|title}}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Created on: {{post.created_date|date:"l, M n Y"}} at {{post.created_date|time:"g:i a"}}</p>
+            </div>
+        </div>
+        <div>
+            <p>{{post.text|slice:":20"}}</p>
+            <a href="{% url 'post_detail' pk=post.pk %}"><p><em>read more</em></p></a>
+        </div>
+    </div>
+{% endfor %}
+
+{%  endblock %}

@@ -1,0 +1,46 @@
+{% extends 'blog/base.html' %}
+{% block createpost %}id="active"{%endblock%}
+
+{% block content %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if object %}
+    <h1>Edit Post.</h1>
+{% else %}
+    <h1>Create Post.</h1>
+{% endif %}
+<div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="alias" value="{{user.username}}">
+    <div class="form-group">
+        <label for="author">Title</label>
+        <!-- <input type="text" name="title" id="title" class="form-control"> -->
+        {{form.title}}
+        {{form.title.errors}}
+    </div>
+    <div class="form-group">
+        <label for="text">Content</label>
+        <!-- <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea> -->
+        {{form.text}}
+        {{form.text.errors}}
+    </div>
+    <div class="form-group loginbtndiv" align="center">
+        <button type="submit" class="btn btn-warning btn-lg">POST</button>
+    </div>
+</form>
+</div>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#text' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+{% block posts %}id="active"{%endblock%}
+
+{% block content %}
+{% for post in post_list %}
+    {% if post.published_date %}
+    <div>
+        <div>
+            <h1 class="customtext"><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Posted by: {{post.author|title}}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Posted on: {{post.published_date|date:"l, M n Y"}} at {{post.published_date|time:"g:i a"}}</p>
+            </div>
+            <div class="col-md-4" align="right">
+                {% if post.approved_comments %}
+                    <p><a href="{% url 'post_detail' pk=post.pk %}">Comment(s): {{post.approved_comments.count}}</a></p>
+                {% else %}
+                    <p>No Comments</p>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <p>{{post.text|slice:":20"}}</p>
+            <a href="{% url 'post_detail' pk=post.pk %}"><p><em>read more</em></p></a>
+        </div>
+    </div>
+    <hr>
+    {% else %}
+        <h3 align="center">Sorry, no content has been posted on this blog yet, please check back soon.</h3>
+        <h4 align="center"><a href="{% url 'createpost' %}">CLICK here</a> to add create new post</h4>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}
